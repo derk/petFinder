@@ -42,6 +42,13 @@ var translationsEN = {
       LIKE: 'Like',
       COMMENT: 'Comment',
       SHARE: 'Share'
+    },
+    FILTER: {
+      TITLE: 'Filter your results',
+      NAME: 'Name',
+      NEIGHBORHOOD: 'Neighborhood',
+      RADIUS: 'Radius',
+      SUBMIT: 'Filter'
     }
   },
   TAB_FOUND_TEXT: 'Found',
@@ -93,6 +100,13 @@ var translationsES= {
       LIKE: 'Me gusta',
       COMMENT: 'Comentar',
       SHARE: 'Compartir'
+    },
+    FILTER: {
+      TITLE: 'Filtra tus resultados',
+      NAME: 'Nombre',
+      NEIGHBORHOOD: 'Barrio',
+      RADIUS: 'Radio',
+      SUBMIT: 'Filtrar'
     }
   },
   TAB_FOUND_TEXT: 'Encontrados',

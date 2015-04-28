@@ -7,10 +7,12 @@ controllerModule.controller('MapCtrl',
       '$timeout',
       '$ionicLoading',
       'MapSrv',
+      'LocationSrv',
   function($scope,
            $timeout,
            $ionicLoading,
-           MapSrv) {
+           MapSrv,
+           LocationSrv) {
 
     $scope.$on('$ionicView.afterEnter', function(){
       // Hack to fix google map breaking after opening a second map in a different view.
@@ -36,7 +38,7 @@ controllerModule.controller('MapCtrl',
         template: "<ion-spinner class='spinner-calm' icon='lines'></ion-spinner>"
       });
 
-      MapSrv.centerOnMe($scope.map).then(
+      LocationSrv.getMyLocation().then(
         function success(pos) {
           $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
           new google.maps.Marker({

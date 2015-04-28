@@ -1,13 +1,57 @@
 <ion-modal-view>
   <ion-header-bar>
-    <h1 class="title" translate>TAB_LOST.FILTER_MODAL.TITLE</h1>
+    <h1 class="title" translate>TAB_LOST.FILTER.TITLE</h1>
     <div class="button button-clear" ng-click="closeModal()"><span class="icon ion-close"></span></div>
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="item in items">
-
-      </ion-item>
+      <form name="lostFilterForm">
+        <div class="row">
+          <div class="col col-100">
+            <label class="item item-input">
+              <input type="text" name="name" placeholder="{{ 'TAB_LOST.FILTER.NAME' | translate }}"
+                     ng-model="filterValues[1].value">
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-100">
+            <label class="item item-input">
+              <input type="text" name="name" placeholder="{{ 'TAB_LOST.FILTER.NEIGHBORHOOD' | translate }}"
+                     ng-model="filterValues[2].value">
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-100">
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Radius in Km
+                <label class="toggle toggle-calm">
+                  <input type="checkbox"
+                         ng-model="filterValues[0].isLocation"
+                         ng-change="getMyLocation()">
+                  <div class="track">
+                    <div class="handle"></div>
+                  </div>
+                </label>
+              </div>
+              <select ng-options="radiusValue.name for radiusValue in radiusValues"
+                      ng-model="filterValues[0].value"
+                      ng-disabled="!filterValues[0].isLocation">
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="row row-center">
+          <div class="col col-100">
+            <button type="button" ng-click="sortOrFilter(options)"
+                    class="button button-block button-calm"
+                    ng-disabled="lostFilterForm.$invalid"
+                    translate>TAB_LOST.FILTER.SUBMIT</button>
+          </div>
+        </div>
+      </form>
     </ion-list>
   </ion-content>
 </ion-modal-view>

@@ -29,7 +29,15 @@ services.factory('LostPetSrv', [
       }
 
       //Apply filtering
+      angular.forEach(options.filter, function (filter) {
+        if(filter.value !== '' &&  filter.field !== 'distance') {
+          query.equalTo(filter.field, filter.value);
+        }
+      });
 
+      if(options.filter[0].isLocation) {
+        query.withinKilometers('location', options.myLocation, options.filter[0].value.value);
+      }
 
       return query.find();
     };

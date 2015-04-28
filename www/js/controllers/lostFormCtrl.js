@@ -14,6 +14,7 @@ controllerModule.controller('LostFormCtrl',
       'CameraSrv',
       'LostPetSrv',
       'MapSrv',
+      'LocationSrv',
       function($scope,
                $filter,
                $timeout,
@@ -24,7 +25,8 @@ controllerModule.controller('LostFormCtrl',
                $translate,
                CameraSrv,
                LostPetSrv,
-               MapSrv) {
+               MapSrv,
+               LocationSrv) {
 
         var STATIC_MAP_URL = 'https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=200x200&center=';
 
@@ -109,7 +111,7 @@ controllerModule.controller('LostFormCtrl',
           $scope.map = MapSrv.initializeMap(document.getElementById('mapModal'), mapOptions);
 
           google.maps.event.addListener($scope.map, 'click', function(event) {
-            $scope.data.location = new Parse.GeoPoint({latitude: event.latLng.lng(), longitude: event.latLng.lat()});
+            $scope.data.location = new Parse.GeoPoint({latitude: event.latLng.lat(), longitude: event.latLng.lng()});
             var latLong = event.latLng.lat() + ',' + event.latLng.lng();
             $scope.mapUrl = STATIC_MAP_URL + latLong;
             $scope.mapUrl += '&markers=color:red|' + latLong;
@@ -149,7 +151,7 @@ controllerModule.controller('LostFormCtrl',
             template: "<ion-spinner class='spinner-calm' icon='lines'></ion-spinner>"
           });
 
-          MapSrv.centerOnMe($scope.map).then(
+          LocationSrv.getMyLocation().then(
             function success(pos) {
               var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
               $scope.map.setCenter(latlng);
